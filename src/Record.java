@@ -1,13 +1,27 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Record {
-
     private List<Alumni> alumniList = new ArrayList<>();
+    File file = new File("D://HUAWEI-PC//Documents//Repos//hogwarts-alumni//src//AlumniLog.txt");
 
     private void addAlumni(Alumni alumni) {
         alumniList.add(alumni);
+    }
+
+    public void printWriter() throws FileNotFoundException, IOException {
+        try (PrintWriter pw = new PrintWriter(new FileOutputStream(file))) {
+            for (Alumni alumni : alumniList) {
+                int alumList = alumniList.size();
+                pw.println(alumni);
+            }
+        }
     }
 
     private void removeAlumni(String alumniName) {
@@ -16,6 +30,8 @@ public class Record {
                alumniList.remove(alumni);
             }
         System.out.println("Successfully removed " + alumniName);
+        System.out.println("");
+
         }
     }
 
@@ -72,6 +88,7 @@ public class Record {
     }
     
     public void showMenu() {
+        System.out.println("");
         System.out.println("Hogwarts Alumni Records");
         System.out.println("Menu");
         System.out.println("1 | Create new record");
@@ -91,6 +108,7 @@ public class Record {
             System.out.print("Input a Number: ");
             inputMenu = s.nextInt();
             s.nextLine();
+            System.out.print("");
 
             switch (inputMenu) {
                 case 1:
@@ -103,8 +121,8 @@ public class Record {
                     main.showAlumniList();
                     break;
                 case 3:
-                    // Delete Alumni
-                    System.out.print("Enter name to delete: ");
+                    // Modify Alumni
+                    System.out.print("Enter name to modify record: ");
                     String alumniName = s.nextLine().toUpperCase();
                     main.removeAlumni(alumniName);
                     break;
@@ -117,9 +135,10 @@ public class Record {
                 case 5:
                     // Save to text file
                     String saveAlumni;
-                    System.out.println("\nWould you like to save this record? (Y/N): ");
+                    System.out.print("\nWould you like to save this record? (Y/N): ");
                     saveAlumni = s.nextLine().toUpperCase();
                         if (saveAlumni == "Y") { 
+                            main.printWriter();
                         } else if (saveAlumni == "N") {
                         System.out.println("Operation is cancelled.");
                         }

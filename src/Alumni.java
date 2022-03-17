@@ -24,9 +24,6 @@ public class Alumni {
         setDateHired(dateHired);
     }
 
-    // ACTIONS
-
-
     // GETTERS AND SETTERS
     public String getAlumniName() {
         return AlumniName;
@@ -67,5 +64,4 @@ public class Alumni {
     public void setDateHired(String dateHired) {
         DateHired = dateHired;
     }
-    
 }
