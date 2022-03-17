@@ -47,19 +47,19 @@ public class Alumni {
         return HonorsAwards;
     }
     public void setHonorsAwards(String honorsAwards) {  
-        HonorsAwards = honorsAwards;
+        HonorsAwards = honorsAwards.toUpperCase();
     }
     public String getCompanyNow() {
         return CompanyNow;
     }
     public void setCompanyNow(String companyNow) {
-        CompanyNow = companyNow;
+        CompanyNow = companyNow.toUpperCase();
     }
     public String getPosition() {
         return Position;
     }
     public void setPosition(String position) {
-        Position = position;
+        Position = position.toUpperCase();
     }
     public String getDateHired() {
         return DateHired;

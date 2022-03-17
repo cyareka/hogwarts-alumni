@@ -51,6 +51,7 @@ public class Record {
 
         System.out.println("Year Graduated: ");
         int yearGrad = scan.nextInt();
+        scan.nextLine();
 
         System.out.println("Honors & Awards: ");
         String honorsAwards = scan.nextLine();
@@ -64,8 +65,10 @@ public class Record {
         System.out.println("Date Hired (MM/DD/YY): ");
         String dateHired = scan.nextLine();
 
+        
         Alumni newAlumni = new Alumni(alumniName, yearGrad, honorsAwards, companyNow, position, dateHired);
         return newAlumni;
+        
     }
     
     public void showMenu() {
@@ -87,6 +90,7 @@ public class Record {
             main.showMenu();
             System.out.print("Input a Number: ");
             inputMenu = s.nextInt();
+            s.nextLine();
 
             switch (inputMenu) {
                 case 1:
