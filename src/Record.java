@@ -14,19 +14,19 @@ public class Record {
         for (Alumni alumni : alumniList) {
            if (alumni.getAlumniName() == alumniName) {
                alumniList.remove(alumni);
-            } 
+            }
+        System.out.println("Successfully removed " + alumniName);
         }
-        showAlumniList();
     }
 
     private void searchAlumniByName(String alumniNameSearch) {
         for (Alumni alumni : alumniList) {
             if (alumni.getAlumniName().equals(alumniNameSearch)) {
                 System.out.println(alumni.getAlumniName() + "'s Record");
-                System.out.println(alumni.getCompanyNow());
-                System.out.println(alumni.getHonorsAwards());
-                System.out.println(alumni.getCompanyNow());
-                System.out.println(alumni.getDateHired());
+                System.out.println("Honors and Awards: " + alumni.getHonorsAwards());
+                System.out.println("Current Company: " + alumni.getCompanyNow());
+                System.out.println("Position: " + alumni.getPosition());
+                System.out.println("Date Hired" + alumni.getDateHired());
             }
         }
     }
@@ -46,23 +46,23 @@ public class Record {
     private Alumni takeAlumni() {
         Scanner scan = new Scanner(System.in);
         
-        System.out.println("Name: ");
+        System.out.print("Name: ");
         String alumniName = scan.nextLine();
 
-        System.out.println("Year Graduated: ");
+        System.out.print("Year Graduated: ");
         int yearGrad = scan.nextInt();
         scan.nextLine();
 
-        System.out.println("Honors & Awards: ");
+        System.out.print("Honors & Awards: ");
         String honorsAwards = scan.nextLine();
 
-        System.out.println("Current Company: ");
+        System.out.print("Current Company: ");
         String companyNow = scan.nextLine();
         
-        System.out.println("Position: ");
+        System.out.print("Position: ");
         String position = scan.nextLine();
 
-        System.out.println("Date Hired (MM/DD/YY): ");
+        System.out.print("Date Hired (MM/DD/YY): ");
         String dateHired = scan.nextLine();
 
         
@@ -72,13 +72,13 @@ public class Record {
     }
     
     public void showMenu() {
-        System.out.println("Hogwarts Alumni Records \n");
+        System.out.println("Hogwarts Alumni Records");
         System.out.println("Menu");
         System.out.println("1 | Create new record");
         System.out.println("2 | Show all records");
         System.out.println("3 | Remove a record");
         System.out.println("4 | Search a record by name");
-        System.out.println("5 | Exit \n");
+        System.out.println("5 | Exit");
     }
 
     public static void main(String[] args) throws Exception {    
@@ -105,13 +105,13 @@ public class Record {
                 case 3:
                     // Delete Alumni
                     System.out.print("Enter name to delete: ");
-                    String alumniName = s.nextLine();
+                    String alumniName = s.nextLine().toUpperCase();
                     main.removeAlumni(alumniName);
                     break;
                 case 4:
                     // Search Alumni by Name
                     System.out.print("Enter name to search: ");
-                    String alumniNameSearch = s.nextLine();
+                    String alumniNameSearch = s.nextLine().toUpperCase();
                     main.searchAlumniByName(alumniNameSearch);
                     break;
                 case 5:
