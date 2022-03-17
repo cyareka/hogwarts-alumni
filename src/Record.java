@@ -89,13 +89,13 @@ public class Record {
     
     public void showMenu() {
         System.out.println("");
-        System.out.println("Hogwarts Alumni Records");
-        System.out.println("Menu");
+        System.out.println("HOGWARTS ALUMNI RECORDS");
+        System.out.println("MENU");
         System.out.println("1 | Create new record");
         System.out.println("2 | Show all records");
-        System.out.println("3 | Remove a record");
+        System.out.println("3 | Modify a record");
         System.out.println("4 | Search a record by name");
-        System.out.println("5 | Exit");
+        System.out.println("5 | Save and Exit");
     }
 
     public static void main(String[] args) throws Exception {    
@@ -140,11 +140,8 @@ public class Record {
                         if (saveAlumni == "Y") { 
                             main.printWriter();
                         } else if (saveAlumni == "N") {
-                        System.out.println("Operation is cancelled.");
+                            System.out.println("Operation is cancelled.");
                         }
-                    break;
-                case 6:
-                    // Exit
                     System.exit(1);
                     break;
             }
