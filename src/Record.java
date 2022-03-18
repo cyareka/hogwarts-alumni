@@ -1,11 +1,8 @@
 import java.util.Scanner;
 import java.io.File;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.io.FileReader;  
 import java.io.Writer; 
 import java.util.ArrayList;
 
@@ -15,19 +12,12 @@ public class Record {
     Alumni a = new Alumni();
 
     File fileName = new File("D:\\HUAWEI-PC\\Documents\\Repos\\hogwarts-alumni\\src\\ALUMNI.txt");
-    String fileN = "ALUMNI.txt";
-    String line;
 
     private void addAlumni(Alumni alumni) {
         alumniList.add(alumni);
     }
 
-    private void removeAlumni(Alumni alumni) {
-        Retrieve();
-        alumniList.removeAll(alumniList);
-    }
-
-    public void Save(Alumni alumni) throws FileNotFoundException {
+    public void Save(Alumni alumni) {
         try {
             FileWriter fw = new FileWriter(fileName);
             Writer output = new BufferedWriter(fw);
@@ -44,24 +34,16 @@ public class Record {
         System.out.println("Successfully created record.");
     }
     
-    private void Retrieve() {
-        try {
-            BufferedReader input = new BufferedReader(new FileReader(fileN));
-            if (!input.ready()) {
-                throw new IOException();
-            }
-            while ((line = input.readLine()) != null) {
-                System.out.println(line);
-            }
-            input.close();
+    private void Retrieve() throws FileNotFoundException {
+        Scanner scan = new Scanner(fileName);
+        while (scan.hasNextLine()) {
+            System.out.println(scan.nextLine());;
         }
-        catch (Exception e) {
-            System.out.println(e);
-        }
+        scan.close();
     }
 
     private Alumni takeAlumni() {
-        System.out.println("CREATE A NEW RECORD \n");
+        System.out.println("\nCREATE A NEW RECORD");
         
         System.out.print("Name: ");
         String alumniName = s.nextLine();
@@ -86,13 +68,18 @@ public class Record {
         return newAlumni;
     }
 
-    private Alumni modifyAlumni() {
-        Retrieve();
+    private Alumni modifyAlumni(String alumniNameSearch) throws FileNotFoundException {
+        for (Alumni alumni : alumniList) {
+            if (alumni.getAlumniName().equals(alumniNameSearch)) {
+                System.out.println(alumni.getAlumniName() + "'s Record");
+                System.out.println("Honors and Awards: " + alumni.getHonorsAwards());
+                System.out.println("Current Company: " + alumni.getCompanyNow());
+                System.out.println("Position: " + alumni.getPosition());
+                System.out.println("Date Hired: " + alumni.getDateHired());
+            }
+        }
 
-        System.out.println("MODIFY RECORD \n");
-        System.out.println("Name: " + a.getAlumniName());
-        System.out.println("Year Graduated: " + a.getYearGrad());
-        System.out.println("Honors & Awards: " + a.getHonorsAwards());
+        System.out.println("");
 
         System.out.print("Current Company: ");
         String companyNow = s.nextLine();
@@ -112,8 +99,9 @@ public class Record {
         System.out.println("HOGWARTS ALUMNI RECORDS");
         System.out.println("MENU");
         System.out.println("1 | Create new record");
-        System.out.println("2 | Modify records");
-        System.out.println("3 | Save and Exit");
+        System.out.println("2 | View record");
+        System.out.println("3 | Modify record");
+        System.out.println("4 | Exit");
     }
 
     public static void main(String[] args) throws Exception {    
@@ -135,16 +123,25 @@ public class Record {
                     main.Save(alumni);
                     break;
                 case 2:
-                    // Modify Alumni
-                    alumni = main.modifyAlumni();
-                    main.removeAlumni(alumni);
+                    // Show Alumni
+                    main.Retrieve();
                     break;
                 case 3:
+                    // Modify Alumni
+                    System.out.println("MODIFY RECORD");
+                    System.out.println("CURRENT RECORDS");
+                    main.Retrieve();
+
+                    System.out.print("Input a record name: ");
+                    String alumniNameSearch = s.nextLine().toUpperCase();
+
+                    main.modifyAlumni(alumniNameSearch);
+                    break;
+                case 4:
                     // Exit
-                    System.exit(1);
                     break;
             }
-        } while (inputMenu !=3);
+        } while (inputMenu != 4);
         s.close();
     }
 }

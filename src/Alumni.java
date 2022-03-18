@@ -78,9 +78,9 @@ public class Alumni implements Serializable {
     @Override
     public String toString() {
         return "Name: " + AlumniName + "\n" +
-        ("Year Grad: " + YearGrad + "\n") +
+        ("Year Graduated: " + YearGrad + "\n") +
         ("Current Company: " + CompanyNow + "\n") + 
         ("Position: " + Position + "\n") +
-        ("Date Hired: " + DateHired);
+        ("Date Hired: " + DateHired + "\n");
     }
 }
