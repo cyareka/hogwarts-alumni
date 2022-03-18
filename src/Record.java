@@ -39,7 +39,7 @@ public class Record {
             FileWriter fw = new FileWriter(fileName);
             Writer output = new BufferedWriter(fw);
             int sz = alumniList.size();
-            for (int i = 0; i < sz; i++) {
+            for (int i = 0; i < sz; i++) { 
                 output.write(alumniList.get(i).totoString() + "\n");
             }
             output.flush();
