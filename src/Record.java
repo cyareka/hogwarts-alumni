@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Record {
     static Scanner s = new Scanner(System.in);
-    ArrayList<Alumni> alumniList = new ArrayList<Alumni>();
+    private ArrayList<Alumni> alumniList = new ArrayList<Alumni>();
     Alumni a = new Alumni();
 
     File fileName = new File("D:\\HUAWEI-PC\\Documents\\Repos\\hogwarts-alumni\\src\\ALUMNI.txt");
@@ -64,8 +64,8 @@ public class Record {
         System.out.print("Date Hired (MM/DD/YY): ");
         String dateHired = s.nextLine();
 
-        Alumni newAlumni = new Alumni(alumniName, yearGrad, honorsAwards, companyNow, position, dateHired);
-        return newAlumni;
+        Alumni alumni = new Alumni(alumniName, yearGrad, honorsAwards, companyNow, position, dateHired);
+        return alumni;
     }
 
     private Alumni modifyAlumni(String alumniNameSearch) throws FileNotFoundException {
@@ -82,19 +82,19 @@ public class Record {
         System.out.println("");
 
         System.out.print("Current Company: ");
-        String companyNow = s.nextLine();
+        String newCompanyNow = s.nextLine();
         
         System.out.print("Position: ");
-        String position = s.nextLine();
+        String newPosition = s.nextLine();
 
         System.out.print("Date Hired (MM/DD/YY): ");
-        String dateHired = s.nextLine();
+        String newDateHired = s.nextLine();
 
-        Alumni updateAlumni = new Alumni(companyNow, position, dateHired);
+        Alumni updateAlumni = new Alumni(newCompanyNow, newPosition, newDateHired);
         return updateAlumni;
     }
     
-    void showMenu() {
+    public void showMenu() {
         System.out.println("");
         System.out.println("HOGWARTS ALUMNI RECORDS");
         System.out.println("MENU");
@@ -135,7 +135,8 @@ public class Record {
                     System.out.print("Input a record name: ");
                     String alumniNameSearch = s.nextLine().toUpperCase();
 
-                    main.modifyAlumni(alumniNameSearch);
+                    alumni = main.modifyAlumni(alumniNameSearch);
+                    main.Save(alumni);
                     break;
                 case 4:
                     // Exit

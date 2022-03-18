@@ -83,4 +83,5 @@ public class Alumni implements Serializable {
         ("Position: " + Position + "\n") +
         ("Date Hired: " + DateHired + "\n");
     }
+
 }
