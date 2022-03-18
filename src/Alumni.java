@@ -25,6 +25,14 @@ public class Alumni implements Serializable {
         setPosition(position);
         setDateHired(dateHired);
     }
+    public Alumni(String companyNow, String position, String dateHired) {
+        getAlumniName();
+        getYearGrad();
+        getHonorsAwards();
+        setCompanyNow(companyNow);
+        setPosition(position);
+        setDateHired(dateHired);
+    }
 
     // GETTERS AND SETTERS
     public String getAlumniName() {
