@@ -17,7 +17,7 @@ public class Record {
         alumniList.add(alumni);
     }
 
-    public void Save(Alumni alumni) {
+    public void Save() {
         try {
             FileWriter fw = new FileWriter(fileName);
             Writer output = new BufferedWriter(fw);
@@ -33,7 +33,24 @@ public class Record {
         }
         System.out.println("Successfully created record.");
     }
-    
+  
+    public void newSave() {
+        try {
+            FileWriter fw = new FileWriter(fileName);
+            Writer output = new BufferedWriter(fw);
+            int sz = alumniList.size();
+            for (int i = 0; i < sz; i++) {
+                output.write(alumniList.get(i).totoString() + "\n");
+            }
+            output.flush();
+            output.close();
+            fw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("Successfully updated record.");
+    }
+
     private void Retrieve() throws FileNotFoundException {
         Scanner scan = new Scanner(fileName);
         while (scan.hasNextLine()) {
@@ -68,7 +85,7 @@ public class Record {
         return alumni;
     }
 
-    private Alumni modifyAlumni(String alumniNameSearch) throws FileNotFoundException {
+    private void searchAlumniByName(String alumniNameSearch) {
         for (Alumni alumni : alumniList) {
             if (alumni.getAlumniName().equals(alumniNameSearch)) {
                 System.out.println(alumni.getAlumniName() + "'s Record");
@@ -78,19 +95,22 @@ public class Record {
                 System.out.println("Date Hired: " + alumni.getDateHired());
             }
         }
+    }
 
-        System.out.println("");
+    private Alumni modifyAlumni() {
+
+        System.out.println("Update the following: \n");
 
         System.out.print("Current Company: ");
-        String newCompanyNow = s.nextLine();
+        String newCompany = s.nextLine();
         
         System.out.print("Position: ");
         String newPosition = s.nextLine();
 
         System.out.print("Date Hired (MM/DD/YY): ");
-        String newDateHired = s.nextLine();
+        String newDH = s.nextLine();
 
-        Alumni updateAlumni = new Alumni(newCompanyNow, newPosition, newDateHired);
+        Alumni updateAlumni = new Alumni(newCompany, newPosition, newDH);
         return updateAlumni;
     }
     
@@ -120,7 +140,7 @@ public class Record {
                     // Add alumni
                     Alumni alumni = main.takeAlumni();
                     main.addAlumni(alumni);
-                    main.Save(alumni);
+                    main.Save();
                     break;
                 case 2:
                     // Show Alumni
@@ -128,15 +148,15 @@ public class Record {
                     break;
                 case 3:
                     // Modify Alumni
-                    System.out.println("MODIFY RECORD");
                     System.out.println("CURRENT RECORDS");
                     main.Retrieve();
 
-                    System.out.print("Input a record name: ");
+                    System.out.print("Input a record name to modify: ");
                     String alumniNameSearch = s.nextLine().toUpperCase();
 
-                    alumni = main.modifyAlumni(alumniNameSearch);
-                    main.Save(alumni);
+                    main.searchAlumniByName(alumniNameSearch);
+                    alumni = main.modifyAlumni();
+                    main.newSave();
                     break;
                 case 4:
                     // Exit
