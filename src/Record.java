@@ -40,7 +40,7 @@ public class Record {
             Writer output = new BufferedWriter(fw);
             int sz = alumniList.size();
             for (int i = 0; i < sz; i++) { 
-                output.write(alumniList.get(i).totoString() + "\n");
+                output.write(alumniList.get(i).toString() + "\n");
             }
             output.flush();
             output.close();

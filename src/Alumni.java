@@ -101,13 +101,4 @@ public class Alumni implements Serializable {
         ("Position: " + Position + "\n") +
         ("Date Hired: " + DateHired + "\n");
     }
-
-    public String totoString() {
-        return "Name: " + AlumniName + "\n" +
-        ("Year Graduated: " + YearGrad + "\n") +
-        ("Current Company: " + newCompany + "\n") + 
-        ("Position: " + newPosition + "\n") +
-        ("Date Hired: " + newDH + "\n");
-    }
-
 }
