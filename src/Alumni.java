@@ -1,4 +1,6 @@
-public class Alumni {
+import java.io.Serializable;
+
+public class Alumni implements Serializable {
 
     private String AlumniName;
     private int YearGrad;
@@ -63,5 +65,14 @@ public class Alumni {
     }
     public void setDateHired(String dateHired) {
         DateHired = dateHired;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + AlumniName + "\n" +
+        ("Year Grad: " + YearGrad + "\n") +
+        ("Current Company: " + CompanyNow + "\n") + 
+        ("Position: " + Position + "\n") +
+        ("Date Hired: " + DateHired);
     }
 }

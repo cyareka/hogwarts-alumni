@@ -1,37 +1,53 @@
 import java.util.Scanner;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Record {
-    private List<Alumni> alumniList = new ArrayList<>();
-    File file = new File("D://HUAWEI-PC//Documents//Repos//hogwarts-alumni//src//AlumniLog.txt");
+    private ArrayList<Alumni> alumniList = new ArrayList<>();
 
     private void addAlumni(Alumni alumni) {
         alumniList.add(alumni);
     }
 
-    public void printWriter() throws FileNotFoundException, IOException {
-        try (PrintWriter pw = new PrintWriter(new FileOutputStream(file))) {
-            for (Alumni alumni : alumniList) {
-                int alumList = alumniList.size();
-                pw.println(alumni);
+    public void Save(ArrayList<Alumni> alumni) {
+        try {
+            File file = new File("ALUMNI.txt");
+            PrintWriter outfile = new PrintWriter(new FileOutputStream(file));
+            FileOutputStream fos = new FileOutputStream(file);
+
+            int alumniSize = alumniList.size();
+            for (int i = 0; i < alumniSize; i++) {
+                outfile.println(toString());
             }
+
+            outfile.close();
+            fos.close();
+        } catch (IOException e) {
+            System.out.println("I cannot create that file.");
         }
     }
 
-    private void removeAlumni(String alumniName) {
+    private void Retrieve(String alumniName) {
         for (Alumni alumni : alumniList) {
-           if (alumni.getAlumniName() == alumniName) {
-               alumniList.remove(alumni);
-            }
-        System.out.println("Successfully removed " + alumniName);
-        System.out.println("");
+            if (alumni.getAlumniName() == alumniName.toUpperCase()) {
+                alumniList.remove(alumni);
+        }
+        try {
+            FileInputStream readData = new FileInputStream("D://HUAWEI-PC//Documents//Repos//hogwarts-alumni//src//PRINT_ALUMNI.txt");
+            ObjectInputStream readStream = new ObjectInputStream(readData);
 
+            ArrayList<Alumni> alumniList2 = (ArrayList<Alumni>) readStream.readObject();
+            readStream.close();
+
+            System.out.println(alumniList2.toString());
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            }
         }
     }
 
@@ -42,7 +58,7 @@ public class Record {
                 System.out.println("Honors and Awards: " + alumni.getHonorsAwards());
                 System.out.println("Current Company: " + alumni.getCompanyNow());
                 System.out.println("Position: " + alumni.getPosition());
-                System.out.println("Date Hired" + alumni.getDateHired());
+                System.out.println("Date Hired: " + alumni.getDateHired());
             }
         }
     }
@@ -124,7 +140,7 @@ public class Record {
                     // Modify Alumni
                     System.out.print("Enter name to modify record: ");
                     String alumniName = s.nextLine().toUpperCase();
-                    main.removeAlumni(alumniName);
+                    main.Retrieve(alumniName);
                     break;
                 case 4:
                     // Search Alumni by Name
@@ -138,7 +154,7 @@ public class Record {
                     System.out.print("\nWould you like to save this record? (Y/N): ");
                     saveAlumni = s.nextLine().toUpperCase();
                         if (saveAlumni == "Y") { 
-                            main.printWriter();
+                            
                         } else if (saveAlumni == "N") {
                             System.out.println("Operation is cancelled.");
                         }
